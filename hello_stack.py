@@ -25,4 +25,10 @@ class MyStack(core.Stack):
                     code= _lambda.Code.asset('lambdacode')) 
                     
         my_api = _apigateway.LambdaRestApi(self,id='lambdaapi',rest_api_name='cdkapi',handler=my_lambda)
-                                  
+        
+        api_with_method = _apigateway.RestApi(self,id='restapi',rest_api_name='cdkrestapi_music')
+        #music = api_with_method.root.addResource('music')
+        #music.addMethod('GET')
+        music = api_with_method.root.add_resource('music')
+        music.add_method('GET') 
+        music.add_method("DELETE", _apigateway.HttpIntegration("http://aws.amazon.com"))
